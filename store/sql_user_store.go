@@ -1,6 +1,8 @@
 package store
 
-import "github.com/claisne/snippetdb/models"
+import (
+	"github.com/claisne/snippetdb/models"
+)
 
 type SqlUserStore struct {
 	*SqlStore
@@ -17,15 +19,26 @@ func (us *SqlUserStore) Get(id int64) (*models.User, error) {
 	return user, err
 }
 
+func (us *SqlUserStore) GetByUsername(username string) (*models.User, error) {
+	user := &models.User{}
+	err := us.db.Get(user, "SELECT * FROM users WHERE username=$1", username)
+	return user, err
+}
+
 func (us *SqlUserStore) Save(user *models.User) error {
-	result, err := us.db.NamedQuery("INSERT INTO users (username, password, email, created_at, last_activity_at) VALUES (:username, :password, :email, :created_at, :last_activity_at) RETURNING id", user)
+	query := "INSERT INTO users (username, password, email, created_at, last_activity_at)" +
+		"VALUES (:username, :password, :email, :created_at, :last_activity_at) RETURNING id"
+	stmt, err := us.db.PrepareNamed(query)
 	if err != nil {
 		return err
 	}
 
 	var id int64
-	result.Scan(&id)
-	user.Id = id
+	err = stmt.Get(&id, user)
+	if err != nil {
+		return err
+	}
 
+	user.Id = id
 	return nil
 }

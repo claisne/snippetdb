@@ -4,6 +4,9 @@ CREATE TABLE users (
     username TEXT NOT NULL,
     password TEXT NOT NULL,
     email TEXT NOT NULL,
+    snippet_views_count INTEGER NOT NULL,
+    snippet_upvotes_count INTEGER NOT NULL,
+    snippet_saves_count INTEGER NOT NULL,
     created_at TIMESTAMP NOT NULL,
     last_activity_at TIMESTAMP NOT NULL
 );

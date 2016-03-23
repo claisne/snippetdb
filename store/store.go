@@ -8,5 +8,6 @@ type Store interface {
 
 type UserStore interface {
 	Get(id int64) (*models.User, error)
+	GetByUsername(username string) (*models.User, error)
 	Save(user *models.User) error
 }
