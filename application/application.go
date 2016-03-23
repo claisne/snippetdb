@@ -51,6 +51,7 @@ func (app *Application) MiddlewareStruct() (*interpose.Middleware, error) {
 
 func (app *Application) mux() *gorilla_mux.Router {
 	router := gorilla_mux.NewRouter()
+	MustLogin := middlewares.MustLogin
 
 	// Home
 	router.Handle("/", http.HandlerFunc(handlers.GetHome)).Methods("GET")
@@ -62,6 +63,7 @@ func (app *Application) mux() *gorilla_mux.Router {
 	router.Handle("/register", http.HandlerFunc(handlers.PostRegister)).Methods("POST")
 
 	// Users
+	router.Handle("/account", MustLogin(http.HandlerFunc(handlers.GetAccount))).Methods("GET")
 	router.Handle("/users/{id:[0-9]+}", http.HandlerFunc(handlers.GetUser)).Methods("GET")
 
 	// Path of static files must be last!

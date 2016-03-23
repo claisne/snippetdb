@@ -61,14 +61,7 @@ func PostLogin(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	jsonBytes, err := user.ToJson()
-	if err != nil {
-		libhttp.HandleErrorJson(w, err)
-		return
-	}
-
-	w.Header().Set("Content-Type", "text/json")
-	w.Write(jsonBytes)
+	http.Redirect(w, r, "/account", 302)
 }
 
 func PostRegister(w http.ResponseWriter, r *http.Request) {
@@ -86,12 +79,5 @@ func PostRegister(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	jsonBytes, err := user.ToJson()
-	if err != nil {
-		libhttp.HandleErrorJson(w, err)
-		return
-	}
-
-	w.Header().Set("Content-Type", "text/json")
-	w.Write(jsonBytes)
+	PostLogin(w, r)
 }

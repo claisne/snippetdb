@@ -37,11 +37,14 @@ func (u *User) ComparePassword(password string) bool {
 
 func NewUserFromForm(values url.Values) (*User, error) {
 	user := &User{
-		Username:       values.Get("username"),
-		Email:          values.Get("email"),
-		Password:       values.Get("password"),
-		CreatedAt:      time.Now(),
-		LastActivityAt: time.Now(),
+		Username:            values.Get("username"),
+		Password:            values.Get("password"),
+		Email:               values.Get("email"),
+		CreatedAt:           time.Now(),
+		SnippetViewsCount:   0,
+		SnippetSavesCount:   0,
+		SnippetUpvotesCount: 0,
+		LastActivityAt:      time.Now(),
 	}
 
 	// Check if valid attributes

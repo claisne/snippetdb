@@ -1,0 +1,188 @@
+{{define "content"}}
+<section class="navbar">
+  <div class="container">
+        <div class="navbar-flex-layout">
+          <div class="navbar-brand">
+              <a href="/">
+                  <i class="ion-code"></i>
+                  SnippetDB
+              </a>
+          </div>
+          <div class="navbar-search">
+              <input class="navbar-search-input" type="text"/>
+          </div>
+          <div class="navbar-account">
+              <a href="#" class="btn btn-default">Account</a>
+          </div>
+        </div>
+      </div>
+</section>
+
+<section class="subnavbar subnavbar-account">
+  <div class="container subnavbar-account-container">
+      <a href="#" class="btn btn-default subnavbar-account-col-left">
+        <i class="ion-plus color-active"></i> New snippet
+      </a>
+      <a href="#" class="btn btn-default subnavbar-account-col-left">
+        <i class="ion-plus color-active"></i> New snippet set
+      </a>
+      <!-- <a href="#" class="btn btn-default subnavbar-account-col-right">
+        <i class="ion-log-out"></i> Log out
+      </a> -->
+  </div>
+</section>
+
+<section class="profile">
+  <div class="container pure-g">
+    <div class="pure-u-1 pure-u-lg-1-2">
+      <div class="snippet-search-results">Profile</div>
+      <div class="profile-container">
+        <div class="profile-username">{{.Username}}</div>
+        <div class="profile-infos">
+          <div>{{.SnippetViewsCount}} views</div>
+          <div>{{.SnippetUpvotesCount}} <i class="ion-arrow-up-b ion-vote-active"></i> {{.SnippetSavesCount}} <i class="ion-heart ion-heart-active"></i></div>
+        </div>
+      </div>
+      <div class="snippet-search-results">Saved snippets</div>
+      <div class="account-languages-container">
+          <div class="language-container home-language-container">
+            <img src="/icons/lang/javascript.svg" />
+          </div>
+          <div class="language-container home-language-container">
+            <img src="/icons/lang/java.svg" />
+          </div>
+          <div class="language-container home-language-container">
+            <img src="/icons/lang/python.svg" />
+          </div>
+          <div class="language-container home-language-container">
+            <img src="/icons/lang/ruby.svg" />
+          </div>
+          <div class="language-container home-language-container">
+            <img src="/icons/lang/php.svg" />
+          </div>
+          <div class="language-container home-language-container" style="opacity: 0.5; cursor: initial;">
+            <img src="/icons/lang/cplusplus.svg" />
+          </div>
+          <div class="language-container home-language-container">
+            <img src="/icons/lang/c.svg" />
+          </div>
+          <div class="language-container home-language-container">
+            <img src="/icons/lang/csharp.svg" />
+          </div>
+          <div class="language-container home-language-container">
+            <img src="/icons/lang/go.svg" />
+          </div>
+          <div class="language-container home-language-container">
+            <img src="/icons/lang/erlang.svg" />
+          </div>
+          <div class="language-container home-language-container">
+            <img src="/icons/lang/html5.svg" />
+          </div>
+          <div class="language-container home-language-container">
+            <img src="/icons/lang/css3.svg" />
+          </div>
+          <div class="language-container home-language-container">
+            <img src="/icons/lang/scala.svg" />
+          </div>
+          <div class="language-container home-language-container">
+            <img src="/icons/lang/clojure.svg" />
+          </div>
+          <div class="language-container home-language-container">
+            <img src="/icons/lang/swift.svg" />
+          </div>
+          <div class="language-container home-language-container">
+            <img src="/icons/lang/haskell.svg" />
+          </div>
+          <div class="language-container home-language-container">
+            <img src="/icons/lang/rust.svg" />
+          </div>
+          <div class="language-container home-language-container">
+            <img src="/icons/lang/ocaml.svg" />
+          </div>
+      </div>
+    </div>
+    <div class="pure-u-1 pure-u-lg-1-2">
+        <div class="snippet-search-results">Most upvoted snippet</div>
+                <div class="snippet-wrapper snippet-wrapper-account">
+                    <div class="snippet-container">
+                        <div class="snippet-header">
+                            <img class="snippet-header-lang-img" src="/icons/lang/javascript.svg"/>
+                            <div class="snippet-header-title">Http get</div>
+                            <div class="snippet-header-icons">
+                                <span class="snippet-upvote">
+                                    <i class="ion-arrow-down-b"></i>
+                                    250
+                                    <i class="ion-arrow-up-b"></i>
+                                </span>
+                                <span class="snippet-save">
+                                    <i class="ion-heart-active ion-heart"></i>
+                                    250
+                                </span>
+                            </div>
+                        </div>
+                        <div class="snippet-flex-layout">
+                            <div class="snippet-line-numbers">
+                                <span>1</span>
+                                <span>2</span>
+                                <span>3</span>
+                                <span>4</span>
+                                <span>5</span>
+                                <span>6</span>
+                                <span>7</span>
+                                <span>9</span>
+                                <span>10</span>
+                                <span>11</span>
+                                <span>12</span>
+                                <span>13</span>
+                                <span>14</span>
+                                <span>15</span>
+                                <span>16</span>
+                                <span>17</span>
+                                <span>18</span>
+                                <span>19</span>
+                                <span>20</span>
+                                <span>21</span>
+                                <span>22</span>
+                                <span>23</span>
+                                <span>24</span>
+                            </div>
+                            <div class="snippet-snippet-wrapper">
+                                <pre><code class="javascript">var request = require('request');
+var default_headers;
+var site_root = 'http://localhost:3000';
+
+default_headers = {
+'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+'Accept-Language': 'en-us,en;q=0.5',
+'Accept-Encoding': 'gzip, deflate',
+'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7',
+// 'Connection': 'keep-alive',
+'Cache-Control': 'max-age=0'
+};
+
+request({
+url: site_root + '/login',
+headers: default_headers,
+method: 'POST',
+body: JSON.stringify({ user:'my_user', password:'my_pass' })
+}, function (err, res, body) {
+if (!err && res.statusCode == 200) {
+console.log(body);
+}
+});</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </div>
+  </div>
+</section>
+
+<section class="account-snippets">
+  <div class="snippet-search-results">Your snippets sets</div>
+  <div class="snippet-search-results">Your snippets</div>
+</section>
+
+{{template "sign-modal" }}
+
+{{end}}
