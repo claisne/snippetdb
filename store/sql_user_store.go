@@ -18,5 +18,14 @@ func (us *SqlUserStore) Get(id int64) (*models.User, error) {
 }
 
 func (us *SqlUserStore) Save(user *models.User) error {
+	result, err := us.db.NamedQuery("INSERT INTO users (username, password, email, created_at, last_activity_at) VALUES (:username, :password, :email, :created_at, :last_activity_at) RETURNING id", user)
+	if err != nil {
+		return err
+	}
+
+	var id int64
+	result.Scan(&id)
+	user.Id = id
+
 	return nil
 }

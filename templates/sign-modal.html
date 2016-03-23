@@ -1,0 +1,82 @@
+{{define "sign-modal"}}
+<div id="sign-modal-wrapper" class="sign-modal-hidden">
+	<div id="sign-modal-container" class="sign-modal-container">
+        <div id="sign-modal" class="sign-modal">
+            <div class="pure-g">
+                <div class="register-container pure-u-1 pure-u-sm-1-2">
+                    <h4>Create a new account</h4>
+                    <form id="sign-in-form" action="/register" method="post">
+                        <div class="form-group">
+                            <input
+                                value=""
+                                name="username"
+                                class="form-control"
+                                type="text"
+                                maxlength="20"
+                                placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <input
+                                value=""
+                                name="password"
+                                class="form-control"
+                                type="text"
+                                placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <input
+                                value=""
+                                name="password-repeat"
+                                class="form-control"
+                                type="text"
+                                placeholder="Password (repeat)">
+                        </div>
+                        <div class="form-group">
+                            <input
+                                name="email"
+                                class="form-control"
+                                type="email"
+                                placeholder="Email (optional)">
+                        </div>
+                        <div class="sign-form-btn-container">
+                            <button class="form-button">Create</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="sign-in-container pure-u-1 pure-u-sm-1-2">
+                    <h4>Sign in</h4>
+                    <form id="sign-in-form" action="/login" method="post">
+                        <div class="form-group">
+                            <input
+                                value=""
+                                name="username"
+                                class="form-control"
+                                type="text"
+                                maxlength="20"
+                                placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <input
+                                value=""
+                                name="password"
+                                class="form-control"
+                                type="text"
+                                maxlength="20"
+                                placeholder="Password">
+                        </div>
+                        <div class="sign-form-btn-container">
+                            <button class="form-button">Sign in</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="sign-modal-infos">
+                Creating an account will let you save, upvote and create snippets. We will never email you without your pernission.
+            </div>
+        </div>
+	</div>
+</div>
+
+<script src="/js/sign-modal.js"></script>
+
+{{end}}

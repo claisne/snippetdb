@@ -4,17 +4,22 @@ import (
 	"html/template"
 	"net/http"
 
-	"github.com/claisne/snippetdb/libhttp"
+	"github.com/Sirupsen/logrus"
 )
 
-func GetHome(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "text/html")
+var getHomeTemplates *template.Template
 
-	tmpl, err := template.ParseFiles("templates/dashboard.html.tmpl", "templates/home.html.tmpl")
+func init() {
+	var err error
+	getHomeTemplates, err = template.ParseFiles("templates/layout.html", "templates/home.html", "templates/sign-modal.html")
 	if err != nil {
-		libhttp.HandleErrorJson(w, err)
-		return
+		logrus.Fatal("Failed to parse home templates")
 	}
+}
 
-	tmpl.Execute(w, nil)
+func GetHome(w http.ResponseWriter, r *http.Request) {
+	err := getHomeTemplates.Execute(w, nil)
+	if err != nil {
+		logrus.Warn(err.Error())
+	}
 }

@@ -1,0 +1,1 @@
+migrate -url "postgres://postgres:postgres@localhost:5432/snippetdb?sslmode=disable" -path ./migrations
