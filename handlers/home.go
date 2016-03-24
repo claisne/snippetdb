@@ -11,7 +11,8 @@ var getHomeTemplate *template.Template
 
 func init() {
 	var err error
-	getHomeTemplate, err = template.ParseFiles("templates/layout.html", "templates/home.html", "templates/sign-modal.html")
+	getHomeTemplate, err = template.ParseFiles("templates/layout.html",
+		"templates/home.html", "templates/sign-modal.html", "templates/sign.html")
 	if err != nil {
 		logrus.Fatal("Failed to parse home templates")
 	}

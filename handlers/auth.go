@@ -1,12 +1,10 @@
 package handlers
 
 import (
-	"errors"
 	"html/template"
 	"net/http"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/claisne/snippetdb/libhttp"
 	"github.com/claisne/snippetdb/models"
 	"github.com/claisne/snippetdb/store"
 	"github.com/gorilla/context"
@@ -17,16 +15,29 @@ var getSignTemplates *template.Template
 
 func init() {
 	var err error
-	getSignTemplates, err = template.ParseFiles("templates/layout.html", "templates/auth/sign.html")
+	getSignTemplates, err = template.ParseFiles("templates/layout.html", "templates/auth/sign.html", "templates/sign.html")
 	if err != nil {
-		logrus.Fatal("Failed to parse sign templates")
+		logrus.WithFields(logrus.Fields{
+			"error": err.Error(),
+		}).Warn("Unable to parse GetSign templates")
 	}
 }
 
 func GetSign(w http.ResponseWriter, r *http.Request) {
-	err := getSignTemplates.Execute(w, nil)
+	sessionStore := context.Get(r, "sessionStore").(sessions.Store)
+	session, _ := sessionStore.Get(r, "snippetdb-session")
+
+	data := struct {
+		Flashes []string
+	}{
+		Flashes: session.Flashes().([]string),
+	}
+
+	err := getSignTemplates.Execute(w, data)
 	if err != nil {
-		logrus.Warn(err.Error())
+		logrus.WithFields(logrus.Fields{
+			"error": err.Error(),
+		}).Warn("Unable to execute GetSign templates")
 	}
 }
 
@@ -36,17 +47,25 @@ func PostLogin(w http.ResponseWriter, r *http.Request) {
 	username := r.Form.Get("username")
 	password := r.Form.Get("password")
 
+	// Potential Error
+	loginErr := &Error{
+		StatusCode:   403,
+		RedirectPath: "/login",
+	}
+
 	// Find User
 	store := context.Get(r, "store").(store.Store)
 	user, err := store.User().GetByUsername(username)
 	if err != nil {
-		libhttp.HandleErrorJson(w, errors.New("No user found"))
+		loginErr.Message = "No user with this username."
+		loginErr.Render(w, r)
 		return
 	}
 
 	// Check password
 	if !user.ComparePassword(password) {
-		libhttp.HandleErrorJson(w, errors.New("Password mismatch"))
+		loginErr.Message = "The password is incorrect."
+		loginErr.Render(w, r)
 		return
 	}
 
@@ -57,7 +76,7 @@ func PostLogin(w http.ResponseWriter, r *http.Request) {
 
 	err = session.Save(r, w)
 	if err != nil {
-		libhttp.HandleErrorJson(w, err)
+		http.Redirect(w, r, "/error", 500)
 		return
 	}
 

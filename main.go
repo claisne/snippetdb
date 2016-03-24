@@ -20,7 +20,6 @@ func newConfig() (*viper.Viper, error) {
 	c.SetDefault("http_cert_file", "")
 	c.SetDefault("http_key_file", "")
 	c.SetDefault("http_drain_interval", "1s")
-
 	c.AutomaticEnv()
 
 	return c, nil

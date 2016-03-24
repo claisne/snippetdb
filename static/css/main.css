@@ -486,6 +486,13 @@ wrapperwrapperwrapperwrapper
 .snippet-detailed {
 }
 
+.auth-sign {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .sign-modal-hidden {
     visibility: hidden;
 }
@@ -507,6 +514,7 @@ wrapperwrapperwrapperwrapper
 }
 
 .sign-modal {
+    flex:1;
     padding: 35px 0;
     max-width: 758px;
     margin: 30px auto;
