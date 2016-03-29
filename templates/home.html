@@ -2,7 +2,11 @@
 <div class="home-navbar">
   <a class="home-navbar-link" href="/top">Top</a>
   <a class="home-navbar-link" href="/new">Newest</a>
-  <a id="sign-link" href="/account" class="btn btn-default">Account</a>
+  {{if .LoggedIn}}
+  <a href="/account" class="btn btn-default">Account</a>
+  {{else}}
+  <a id="sign-modal-link" href="/account" class="btn btn-default">Account</a>
+  {{end}}
 </div>
 
 <section class="home-search">

@@ -37,7 +37,7 @@ func MustLogin(next http.Handler) http.Handler {
 		user, ok := session.Values["user"].(*models.User)
 
 		if !ok {
-			http.Redirect(res, req, "/", 302)
+			http.Redirect(res, req, "/login", 302)
 			return
 		}
 

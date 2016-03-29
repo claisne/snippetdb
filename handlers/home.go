@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/claisne/snippetdb/models"
 )
 
 var getHomeTemplate *template.Template
@@ -19,8 +20,20 @@ func init() {
 }
 
 func GetHome(w http.ResponseWriter, r *http.Request) {
-	err := getHomeTemplate.Execute(w, nil)
+	user, loggedIn := getUser(r)
+
+	data := struct {
+		User     *models.User
+		LoggedIn bool
+	}{
+		User:     user,
+		LoggedIn: loggedIn,
+	}
+
+	err := getHomeTemplate.Execute(w, data)
 	if err != nil {
-		logrus.Warn(err.Error())
+		logrus.WithFields(logrus.Fields{
+			"error": err.Error(),
+		}).Warn("Unable to execute GetHome templates")
 	}
 }

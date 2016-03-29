@@ -68,11 +68,16 @@
             </form>
         </div>
     </div>
+    {{if .Errors}}
+    {{range .Errors}}
+    <div class="sign-modal-infos">
+      <div class="text-danger">{{.Message}}</div>
+    </div>
+    {{end}}
+    {{else}}
     <div class="sign-modal-infos">
         Creating an account will let you save, upvote and create snippets. We will never email you without your pernission.
     </div>
-    {{range .Flashes}}
-      <p>{{.}}</p>
     {{end}}
 </div>
 {{end}}

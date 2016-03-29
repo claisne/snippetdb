@@ -666,6 +666,10 @@ wrapperwrapperwrapperwrapper
   text-align: center;
 }
 
+.text-danger {
+  color: #a94442;
+}
+
 .text-right {
   text-align: right;
 }

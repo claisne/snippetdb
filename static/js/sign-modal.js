@@ -1,7 +1,7 @@
 
 (function () {
 	var signVisible = false;
-	var signLink = document.getElementById('sign-link');
+	var signLink = document.getElementById('sign-modal-link');
 	var signModal = document.getElementById('sign-modal');
 	var signModalWrapper = document.getElementById('sign-modal-wrapper');
 	var signModalContainer = document.getElementById('sign-modal-container');

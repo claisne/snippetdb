@@ -27,10 +27,13 @@ func GetSign(w http.ResponseWriter, r *http.Request) {
 	sessionStore := context.Get(r, "sessionStore").(sessions.Store)
 	session, _ := sessionStore.Get(r, "snippetdb-session")
 
+	errors := getFlashesErrors(session)
+	session.Save(r, w)
+
 	data := struct {
-		Flashes []string
+		Errors []*Error
 	}{
-		Flashes: session.Flashes().([]string),
+		Errors: errors,
 	}
 
 	err := getSignTemplates.Execute(w, data)
