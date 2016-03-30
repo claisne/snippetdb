@@ -1,4 +1,3 @@
-// Package handlers provides request handlers.
 package handlers
 
 import (
@@ -15,7 +14,7 @@ import (
 )
 
 const (
-	ErrorLevelFail = "fail"
+	ErrorMessageServer = "Internal Server Error, please retry"
 )
 
 type Error struct {

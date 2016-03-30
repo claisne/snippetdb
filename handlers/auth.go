@@ -19,13 +19,18 @@ func init() {
 	if err != nil {
 		logrus.WithFields(logrus.Fields{
 			"error": err.Error(),
-		}).Warn("Unable to parse GetSign templates")
+		}).Fatal("Unable to parse GetSign templates")
 	}
 }
 
 func GetSign(w http.ResponseWriter, r *http.Request) {
 	sessionStore := context.Get(r, "sessionStore").(sessions.Store)
 	session, _ := sessionStore.Get(r, "snippetdb-session")
+
+	user, ok := session.Values["user"].(*models.User)
+	if ok {
+		http.Redirect(res, req, "/login", http.StatusFound)
+	}
 
 	errors := getFlashesErrors(session)
 	session.Save(r, w)
@@ -79,7 +84,8 @@ func PostLogin(w http.ResponseWriter, r *http.Request) {
 
 	err = session.Save(r, w)
 	if err != nil {
-		http.Redirect(w, r, "/error", 500)
+		loginErr.Message = ErrorMessageServer
+		loginErr.Render(w, r)
 		return
 	}
 
@@ -88,16 +94,24 @@ func PostLogin(w http.ResponseWriter, r *http.Request) {
 
 func PostRegister(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
+
+	registerErr := &Error{
+		StatusCode:   403,
+		RedirectPath: "/login",
+	}
+
 	user, err := models.NewUserFromForm(r.Form)
 	if err != nil {
-		logrus.Warn(err.Error())
+		registerErr.Message = err.Error()
+		registerErr.Render(w, r)
 		return
 	}
 
 	store := context.Get(r, "store").(store.Store)
 	err = store.User().Save(user)
 	if err != nil {
-		logrus.Warn(err.Error())
+		registerErr.Message = ErrorMessageServer
+		registerErr.Render(w, r)
 		return
 	}
 

@@ -7,6 +7,7 @@ import (
 	"net/url"
 	"time"
 
+	valid "github.com/asaskevich/govalidator"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -27,6 +28,26 @@ func init() {
 }
 
 func (u *User) IsValid() error {
+	if !valid.IsAlphanumeric(u.Username) {
+		return errors.New("The username must only contains alphanumerical characters")
+	}
+
+	if len(u.Username) < 3 || len(u.Username) > 10 {
+		return errors.New("The username must have a maximun of 10 characters and a minimum of 3")
+	}
+
+	if u.Email != "" && !valid.IsEmail(u.Email) {
+		return errors.New("The email must be empty or a valid adress")
+	}
+
+	if len(u.Email) > 150 {
+		return errors.New("The email must have a maximum of 150 characters")
+	}
+
+	if len(u.Password) < 4 || len(u.Password) > 50 {
+		return errors.New("The username must have a maximun of 50 characters and a minimum of 4")
+	}
+
 	return nil
 }
 
@@ -62,7 +83,7 @@ func NewUserFromForm(values url.Values) (*User, error) {
 	// Hash password
 	hashedPassword, err := hashPassword(user.Password)
 	if user.Password != passwordRepeat {
-		return nil, errors.New("Failed to hash")
+		return nil, errors.New("Internal Error. Please retry")
 	}
 
 	user.Password = hashedPassword
