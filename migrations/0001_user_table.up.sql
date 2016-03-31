@@ -7,8 +7,9 @@ CREATE TABLE users (
     snippet_views_count INTEGER NOT NULL,
     snippet_upvotes_count INTEGER NOT NULL,
     snippet_saves_count INTEGER NOT NULL,
+    last_activity_at TIMESTAMP NOT NULL,
     created_at TIMESTAMP NOT NULL,
-    last_activity_at TIMESTAMP NOT NULL
+    modified_at TIMESTAMP NOT NULL
 );
 
 CREATE UNIQUE INDEX idx_users_username on users (username);

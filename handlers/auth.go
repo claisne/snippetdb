@@ -8,7 +8,6 @@ import (
 	"github.com/claisne/snippetdb/models"
 	"github.com/claisne/snippetdb/store"
 	"github.com/gorilla/context"
-	"github.com/gorilla/sessions"
 )
 
 var getSignTemplates *template.Template
@@ -24,12 +23,11 @@ func init() {
 }
 
 func GetSign(w http.ResponseWriter, r *http.Request) {
-	sessionStore := context.Get(r, "sessionStore").(sessions.Store)
-	session, _ := sessionStore.Get(r, "snippetdb-session")
+	session, _ := getSession(r)
 
-	user, ok := session.Values["user"].(*models.User)
+	_, ok := session.Values["user"].(*models.User)
 	if ok {
-		http.Redirect(res, req, "/login", http.StatusFound)
+		http.Redirect(w, r, "/account", http.StatusFound)
 	}
 
 	errors := getFlashesErrors(session)
@@ -47,6 +45,14 @@ func GetSign(w http.ResponseWriter, r *http.Request) {
 			"error": err.Error(),
 		}).Warn("Unable to execute GetSign templates")
 	}
+}
+
+func GetLogout(w http.ResponseWriter, r *http.Request) {
+	session, _ := getSession(r)
+	delete(session.Values, "user")
+	session.Save(r, w)
+
+	http.Redirect(w, r, "/", http.StatusFound)
 }
 
 func PostLogin(w http.ResponseWriter, r *http.Request) {
@@ -78,8 +84,7 @@ func PostLogin(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Update Session
-	sessionStore := context.Get(r, "sessionStore").(sessions.Store)
-	session, _ := sessionStore.Get(r, "snippetdb-session")
+	session, _ := getSession(r)
 	session.Values["user"] = user
 
 	err = session.Save(r, w)

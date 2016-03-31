@@ -1,0 +1,8 @@
+
+CREATE TABLE languages (
+    id BIGSERIAL PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL UNIQUE,
+    created_at TIMESTAMP NOT NULL,
+    modified_at TIMESTAMP NOT NULL
+);
+

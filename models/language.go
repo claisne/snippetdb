@@ -2,30 +2,22 @@ package models
 
 import (
 	"encoding/json"
-	"net/url"
 	"time"
 )
 
 type Language struct {
-	Id             int64     `json:"id"`
-	CreatedAt      time.Time `json:"createdAt" db:"created_at"`
-	LastActivityAt time.Time `json:"lastActivityAt" db:"last_activity_at"`
+	Id         int64     `json:"id"`
+	Name       string    `json:"name"`
+	IconPath   string    `json:"iconPath" db:"icon_path"`
+	CreatedAt  time.Time `json:"createdAt" db:"created_at"`
+	ModifiedAt time.Time `json:"modifiedAt" db:"modified_at"`
 }
 
 func (l *Language) IsValid() error {
 	return nil
 }
 
-func NewLanguageFromForm(values url.Values) (*Language, error) {
-	language := &Language{
-		CreatedAt:      time.Now(),
-		LastActivityAt: time.Now(),
-	}
-
-	return language
-}
-
 func (l *Language) ToJson() ([]byte, error) {
-	b, err := json.Marshal(u)
+	b, err := json.Marshal(l)
 	return b, err
 }

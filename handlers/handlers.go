@@ -49,6 +49,11 @@ func getUser(r *http.Request) (*models.User, bool) {
 	return user, ok
 }
 
+func getSession(r *http.Request) (*sessions.Session, error) {
+	sessionStore := context.Get(r, "sessionStore").(sessions.Store)
+	return sessionStore.Get(r, "snippetdb-session")
+}
+
 func getFlashesErrors(session *sessions.Session) []*Error {
 	flashes := session.Flashes()
 	errors := make([]*Error, 0, 5)

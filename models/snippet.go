@@ -7,9 +7,16 @@ import (
 )
 
 type Snippet struct {
-	Id             int64     `json:"id"`
-	CreatedAt      time.Time `json:"createdAt" db:"created_at"`
-	LastActivityAt time.Time `json:"lastActivityAt" db:"last_activity_at"`
+	Id           int64     `json:"id"`
+	UserId       int64     `json:"userId" db:"user_id"`
+	LanguageId   int64     `json:"languageId" db:"language_id"`
+	Title        string    `json:"title"`
+	Code         string    `json:"code"`
+	ViewsCount   int64     `json:"viewsCount" db:"views_count"`
+	UpvotesCount int64     `json:"upvotesCount" db:"upvotes_count"`
+	SavesCount   int64     `json:"savesCount" db:"saves_count"`
+	CreatedAt    time.Time `json:"createdAt" db:"created_at"`
+	ModifiedAt   time.Time `json:"modifiedAt" db:"modified_at"`
 }
 
 func (s *Snippet) IsValid() error {
@@ -22,7 +29,7 @@ func NewSnippetFromForm(values url.Values) (*Snippet, error) {
 		LastActivityAt: time.Now(),
 	}
 
-	return snippet
+	return snippet, nil
 }
 
 func (u *Snippet) ToJson() ([]byte, error) {

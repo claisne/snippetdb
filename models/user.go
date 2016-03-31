@@ -19,8 +19,9 @@ type User struct {
 	SnippetViewsCount   int64     `json:"snippetViewsCount" db:"snippet_views_count"`
 	SnippetUpvotesCount int64     `json:"snippetUpvotesCount" db:"snippet_upvotes_count"`
 	SnippetSavesCount   int64     `json:"snippetSavesCount" db:"snippet_saves_count"`
-	CreatedAt           time.Time `json:"createdAt" db:"created_at"`
 	LastActivityAt      time.Time `json:"lastActivityAt" db:"last_activity_at"`
+	CreatedAt           time.Time `json:"createdAt" db:"created_at"`
+	ModifiedAt          time.Time `json:"modifiedAt" db:"modified_at"`
 }
 
 func init() {
