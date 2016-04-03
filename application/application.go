@@ -66,6 +66,9 @@ func (app *Application) mux() *gorilla_mux.Router {
 	router.Handle("/account", MustLogin(http.HandlerFunc(handlers.GetAccount))).Methods("GET")
 	router.Handle("/users/{id:[0-9]+}", http.HandlerFunc(handlers.GetUser)).Methods("GET")
 
+	// Snippets
+	router.Handle("/snippets/new", MustLogin(http.HandlerFunc(handlers.GetNewSnippet))).Methods("GET")
+
 	// Path of static files must be last!
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("static")))
 

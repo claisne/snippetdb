@@ -25,8 +25,8 @@ func (s *Snippet) IsValid() error {
 
 func NewSnippetFromForm(values url.Values) (*Snippet, error) {
 	snippet := &Snippet{
-		CreatedAt:      time.Now(),
-		LastActivityAt: time.Now(),
+		CreatedAt:  time.Now(),
+		ModifiedAt: time.Now(),
 	}
 
 	return snippet, nil

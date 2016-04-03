@@ -1,26 +1,10 @@
 {{define "content"}}
-<section class="navbar">
-  <div class="container">
-        <div class="navbar-flex-layout">
-          <div class="navbar-brand">
-              <a href="/">
-                  <i class="ion-code"></i>
-                  SnippetDB
-              </a>
-          </div>
-          <div class="navbar-search">
-              <input class="navbar-search-input" type="text"/>
-          </div>
-          <div class="navbar-account">
-              <a href="#" class="btn btn-default">Account</a>
-          </div>
-        </div>
-      </div>
-</section>
+
+{{template "navbar"}}
 
 <section class="subnavbar subnavbar-account">
   <div class="container subnavbar-account-container">
-      <a href="#" class="btn btn-default subnavbar-account-col-left">
+      <a href="/snippets/new" class="btn btn-default subnavbar-account-col-left">
         <i class="ion-plus color-active"></i> New snippet
       </a>
       <a href="#" class="btn btn-default subnavbar-account-col-left">

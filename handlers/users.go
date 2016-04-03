@@ -16,7 +16,8 @@ var getAccountTemplate *template.Template
 
 func init() {
 	var err error
-	getAccountTemplate, err = template.ParseFiles("templates/layout.html", "templates/users/account.html")
+	getAccountTemplate, err = template.ParseFiles("templates/layout.html",
+		"templates/users/account.html", "templates/navbar.html")
 	if err != nil {
 		logrus.Fatal("Failed to parse account templates")
 	}
