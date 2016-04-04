@@ -61,6 +61,7 @@ func (app *Application) mux() *gorilla_mux.Router {
 	router.Handle("/login", http.HandlerFunc(handlers.PostLogin)).Methods("POST")
 	router.Handle("/register", http.HandlerFunc(handlers.GetSign)).Methods("GET")
 	router.Handle("/register", http.HandlerFunc(handlers.PostRegister)).Methods("POST")
+	router.Handle("/logout", http.HandlerFunc(handlers.GetLogout)).Methods("GET")
 
 	// Users
 	router.Handle("/account", MustLogin(http.HandlerFunc(handlers.GetAccount))).Methods("GET")

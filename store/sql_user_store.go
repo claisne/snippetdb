@@ -28,10 +28,10 @@ func (us *SqlUserStore) GetByUsername(username string) (*models.User, error) {
 func (us *SqlUserStore) Save(user *models.User) error {
 	query := "INSERT INTO users " +
 		"(username, password, email, " +
-		"created_at, last_activity_at, " +
+		"created_at, modified_at, last_activity_at, " +
 		"snippet_views_count, snippet_upvotes_count, snippet_saves_count)" +
 		"VALUES (:username, :password, :email, " +
-		":created_at, :last_activity_at, " +
+		":created_at, :modified_at, :last_activity_at, " +
 		":snippet_views_count, :snippet_upvotes_count, :snippet_saves_count) RETURNING id"
 	stmt, err := us.db.PrepareNamed(query)
 	if err != nil {

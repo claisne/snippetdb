@@ -62,11 +62,12 @@ func NewUserFromForm(values url.Values) (*User, error) {
 		Username:            values.Get("username"),
 		Password:            values.Get("password"),
 		Email:               values.Get("email"),
-		CreatedAt:           time.Now(),
 		SnippetViewsCount:   0,
 		SnippetSavesCount:   0,
 		SnippetUpvotesCount: 0,
 		LastActivityAt:      time.Now(),
+		CreatedAt:           time.Now(),
+		ModifiedAt:          time.Now(),
 	}
 
 	// Check if valid attributes

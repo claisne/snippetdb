@@ -107,7 +107,7 @@ func PostRegister(w http.ResponseWriter, r *http.Request) {
 
 	user, err := models.NewUserFromForm(r.Form)
 	if err != nil {
-		registerErr.Message = err.Error()
+		registerErr.Message = ErrorMessageServer
 		registerErr.Render(w, r)
 		return
 	}
