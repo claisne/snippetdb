@@ -554,6 +554,25 @@ section.editor {
 #editor {
   position: relative;
   height: 500px;
+  font: normal 11px Consolas, Monaco, monospace;
+  border-top: 1px solid #ddd;
+}
+
+.snippet-editor-container {
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+#editor .ace_gutter {
+  background: white;
+  color: #ccc;
+  border-right: 1px solid #ddd;
+}
+
+#editor .ace_gutter-active-line,
+#editor .ace_marker-layer .ace_active-line {
+  background: #F7F7F7;
 }
 
 /* ==========================================================================
@@ -581,7 +600,6 @@ section.editor {
     margin-left: auto;
     padding: 0 15px;
 }
-
 
 @media (min-width: 768px) {
   .container {
